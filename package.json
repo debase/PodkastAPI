@@ -1,0 +1,35 @@
+{
+  "name": "podcast-api",
+  "version": "1.0.0",
+  "description": "Podcast API",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Etienne Debas",
+  "dependencies": {
+    "async": "^2.0.0-rc.6",
+    "cheerio": "latest",
+    "colors": "^1.1.2",
+    "express": "latest",
+    "moment": "^2.14.1",
+    "mongoose": "^4.5.3",
+    "promise": "^7.1.1",
+    "request": "latest",
+    "string": "^3.3.1",
+    "yargs": "^4.7.1"
+  },
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debase/PodcastAPI.git"
+  },
+  "keywords": [
+    "podcast",
+    "api"
+  ],
+  "bugs": {
+    "url": "https://github.com/debase/PodcastAPI/issues"
+  },
+  "homepage": "https://github.com/debase/PodcastAPI#readme"
+}
