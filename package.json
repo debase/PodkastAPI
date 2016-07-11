@@ -4,16 +4,22 @@
   "description": "Podcast API",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "mocha",
+    "crawl": "node crawler/crawl-podcast.js",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "Etienne Debas",
   "dependencies": {
     "async": "^2.0.0-rc.6",
+    "body-parser": "^1.15.2",
     "cheerio": "latest",
     "colors": "^1.1.2",
     "express": "latest",
+    "jsonwebtoken": "^7.0.1",
     "moment": "^2.14.1",
     "mongoose": "^4.5.3",
+    "morgan": "^1.7.0",
     "promise": "^7.1.1",
     "request": "latest",
     "string": "^3.3.1",

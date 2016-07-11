@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+var libs      = process.cwd() + '/libs/';
 var request   = require("request");
 var cheerio   = require("cheerio");
 var string    = require('string');
@@ -7,13 +10,12 @@ var async     = require('async');
 var colors    = require('colors');
 var argv      = require('yargs').argv;
 
-var Podcast   = require('./models').Podcast;
-var Section   = require('./models').Section;
+var Podcast   = require('../app/models/podcast');
+var Section   = require('../app/models/section');
 
 var unprotectUrl  = "https://linkdecrypter.com/"
 var websiteUrl    = "http://podcast-non-officiel.blogspot.fr/"
 var protectedUrl  = "http://bit.ly/"
-var mongoDbUrl    = "mongodb://localhost:27017/podcasts"
 
 colors.setTheme({
   silly: 'rainbow',
@@ -28,7 +30,7 @@ colors.setTheme({
   error: 'red'
 });
 
-var getSections = function() {
+function getSections() {
 
   return new Promise(function(resolve, reject) {
     var sections = [];
@@ -56,7 +58,7 @@ var getSections = function() {
   })
 }
 
-var processPodcast = function(params, callback) {
+function processPodcast(params, callback) {
 
   if (!params.section.url) {
     return callback("Error : url is not defined")
