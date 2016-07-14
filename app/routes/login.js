@@ -12,9 +12,7 @@ router.post('/token', authController.refreshAccessToken);
 
 //router.post('/facebook/token', passport.authenticate('facebook-token', { scope: [ 'email' ] }), authController.tokenFromUser(req, res));
 
-router.post('/email', passport.authenticate('local', { failureRedirect: '/login' }), function (req, res) {
-    authController.tokenFromUser(req, res);
-});
+router.post('/email', passport.authenticate('local'), authController.tokenFromUser);
 
 
 module.exports = router;

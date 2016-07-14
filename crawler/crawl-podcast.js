@@ -12,6 +12,7 @@ var argv      = require('yargs').argv;
 
 var Podcast   = require('../app/models/podcast');
 var Section   = require('../app/models/section');
+var db        = require('../app/database');
 
 var unprotectUrl  = "https://linkdecrypter.com/"
 var websiteUrl    = "http://podcast-non-officiel.blogspot.fr/"
@@ -77,6 +78,8 @@ function processPodcast(params, callback) {
       var name = link.find('h3.post-title.entry-title > a').text();
       var url = link.find('div.post-body.entry-content > a').attr('href');
 
+      console.log("Find : %s".info, name);
+
       // sometimes
       if (!url) url = link.find('div.post-body.entry-content > span > a').attr('href');
 
@@ -112,22 +115,6 @@ function processPodcast(params, callback) {
   });
 }
 
-mongoose.connection.on("connected", function(ref) {
-  console.log("Connected to %s DB!".debug, mongoDbUrl);
-});
-
-// If the connection throws an error
-mongoose.connection.on("error", function(err) {
-  console.error('Failed to connect to DB %s on startup'.debug, mongoDbUrl);
-});
-
-// When the connection is disconnected
-mongoose.connection.on('disconnected', function () {
-  console.log('Mongoose default connection to DB : %s disconnected'.debug, mongoDbUrl);
-});
-
-var db = mongoose.connect(mongoDbUrl);
-
 getSections()
   .then(function(result) {
     var asynFunc = [];
@@ -153,7 +140,7 @@ getSections()
 
     async.parallelLimit(asynFunc, 5, function() {
       setTimeout(function() {
-        console.log("Disconnecting database %s".debug, mongoDbUrl);
+        console.log("Disconnecting database");
         db.disconnect()
       }, 3000);
     })

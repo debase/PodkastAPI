@@ -15,3 +15,14 @@ module.exports.getSections = function (req, res) {
     return res.status(200).json(sections);
   })
 }
+
+
+module.exports.updateSections = function (req, res) {
+  Section.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        .select('image_url name _id')
+        .exec(function(err, data) {
+            console.log(req.body);
+            if (err) return res.status(500);
+            return res.status(200).json(data);
+        });
+}
